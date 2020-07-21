@@ -18,13 +18,13 @@ export default function useDraggable(handleId) {
         },
         false
       );
-
-      return () => {
-        document.body.removeEventListener("mousedown", move);
-        document.body.removeEventListener("mouseup", move);
-        document.body.removeEventListener("mousemove", move);
-      };
     });
+
+    return () => {
+      document.body.removeEventListener("mouseup", move);
+      document.body.removeEventListener("mousemove", move);
+      handle.removeEventListener("mousedown");
+    };
   }, []);
 
   function move(e) {
