@@ -2,12 +2,16 @@ import React from "react";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 
+import MapDimension from "./map-dimension";
+
 export default function TilePalette({
   tileset,
   setTileset,
   position,
   activeTile,
   setActiveTile,
+  mapSize,
+  setMapSize,
 }) {
   const tilesetData = require("../../data/tilesets.json");
   const tilesets = Object.keys(tilesetData).map((set) => ({
@@ -44,20 +48,37 @@ export default function TilePalette({
         backgroundColor: "white",
       }}
     >
-      <div style={{ display: "flex" }}>
+      <div style={{ display: "flex", margin: 4 }}>
         <img id="handle" src="/img/drag-handle.png" alt="" />
-        <div
-          style={{
-            background: `url(/sprites/${tileset}.png) -${activeTile.x}px -${activeTile.y}px no-repeat`,
-            width: 32,
-            height: 32,
-          }}
-        />
-        <div style={{ width: 200 }}>
+        <div style={{ position: "relative", width: 32, marginLeft: 8 }}>
+          <div
+            style={{
+              position: "relative",
+              background: `url(/sprites/${tileset}.png) -${activeTile.x}px -${activeTile.y}px no-repeat`,
+              width: 32,
+              height: 32,
+              top: 2,
+            }}
+          />
+        </div>
+        <div style={{ width: 200, marginLeft: 8 }}>
           <Dropdown
             options={tilesets}
             onChange={(tileset) => setTileset(tileset.value)}
             value={tileset}
+          />
+        </div>
+        <div style={{ position: "relative", marginLeft: 8 }}>
+          <MapDimension
+            value={mapSize.width}
+            label="w"
+            onChange={(width) => setMapSize((prev) => ({ ...prev, width }))}
+          />
+
+          <MapDimension
+            value={mapSize.height}
+            label="h"
+            onChange={(height) => setMapSize((prev) => ({ ...prev, height }))}
           />
         </div>
       </div>
