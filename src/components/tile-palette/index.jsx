@@ -6,7 +6,6 @@ export default function TilePalette({
   tileset,
   setTileset,
   position,
-  size,
   activeTile,
   setActiveTile,
 }) {
@@ -20,7 +19,8 @@ export default function TilePalette({
     })),
   }));
 
-  const { width, height } = size;
+  const [tilesetGroup, tilesetVariant] = tileset.split("/");
+  const { width, height } = tilesetData[tilesetGroup].size;
   const tiles = [];
   let id = 0;
 
