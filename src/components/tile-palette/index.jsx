@@ -3,6 +3,8 @@ import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 
 import MapDimension from "./map-dimension";
+import exportData from "./export";
+import importData from "./import";
 
 export default function TilePalette({
   tileset,
@@ -12,7 +14,10 @@ export default function TilePalette({
   setActiveTile,
   mapSize,
   setMapSize,
+  bgTile,
   setBgTile,
+  tiles,
+  setTiles,
 }) {
   const tilesetData = require("../../data/tilesets.json");
   const tilesets = Object.keys(tilesetData).map((set) => ({
@@ -26,7 +31,7 @@ export default function TilePalette({
 
   const [tilesetGroup, tilesetVariant] = tileset.split("/");
   const { width, height } = tilesetData[tilesetGroup].size;
-  const tiles = [];
+  const palette = [];
   let id = 0;
 
   for (let y = 0; y < height; y = y + 32) {
@@ -34,7 +39,7 @@ export default function TilePalette({
     for (let x = 0; x < width; x = x + 32) {
       row.push({ x, y, id: id++ });
     }
-    tiles.push(row);
+    palette.push(row);
   }
 
   return (
@@ -89,20 +94,60 @@ export default function TilePalette({
           />
         </div>
 
-        <div style={{ position: "relative", marginLeft: 8 }}>
+        <div style={{ position: "relative", marginLeft: 2 }}>
           <button
             style={{
               padding: "6px 20px",
               textTransform: "uppercase",
               fontSize: "14px",
+              height: 34,
             }}
             onClick={() => setBgTile(activeTile)}
           >
             Fill Base Layer
           </button>
         </div>
+
+        <div style={{ position: "relative", marginLeft: 8 }}>
+          <button
+            onClick={() => exportData({ bgTile, tiles })}
+            style={{
+              padding: "4px 8px",
+              height: 34,
+            }}
+          >
+            <img
+              src="/img/arrow-line.png"
+              alt="export map data"
+              style={{
+                padding: 0,
+                margin: 0,
+              }}
+            />
+          </button>
+        </div>
+
+        <div style={{ position: "relative", marginLeft: 8 }}>
+          <button
+            onClick={() => importData({ setBgTile, setTiles })}
+            style={{
+              padding: "4px 8px",
+              height: 34,
+            }}
+          >
+            <img
+              src="/img/arrow-line.png"
+              alt="export map data"
+              style={{
+                padding: "3px 0",
+                margin: 0,
+                transform: "scaleY(-1)",
+              }}
+            />
+          </button>
+        </div>
       </div>
-      {tiles.map((row, y) => (
+      {palette.map((row, y) => (
         <div style={{ display: "flex" }}>
           {row.map((tile, x) => (
             <div

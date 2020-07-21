@@ -47,7 +47,10 @@ export default function App() {
         setActiveTile={setActiveTile}
         mapSize={mapSize}
         setMapSize={setMapSize}
+        bgTile={bgTile}
         setBgTile={setBgTile}
+        tiles={tiles}
+        setTiles={setTiles}
       />
 
       <Map
