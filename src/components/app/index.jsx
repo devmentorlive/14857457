@@ -44,6 +44,8 @@ export default function App() {
         setTileset={setTileset}
         activeTile={activeTile}
         setActiveTile={setActiveTile}
+        mapSize={mapSize}
+        setMapSize={setMapSize}
       />
 
       <Map
