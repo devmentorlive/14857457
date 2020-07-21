@@ -12,6 +12,7 @@ export default function TilePalette({
   setActiveTile,
   mapSize,
   setMapSize,
+  setBgTile,
 }) {
   const tilesetData = require("../../data/tilesets.json");
   const tilesets = Object.keys(tilesetData).map((set) => ({
@@ -50,7 +51,13 @@ export default function TilePalette({
     >
       <div style={{ display: "flex", margin: 4 }}>
         <img id="handle" src="/img/drag-handle.png" alt="" />
-        <div style={{ position: "relative", width: 32, marginLeft: 8 }}>
+        <div
+          style={{
+            position: "relative",
+            width: 32,
+            marginLeft: 8,
+          }}
+        >
           <div
             style={{
               position: "relative",
@@ -80,6 +87,19 @@ export default function TilePalette({
             label="h"
             onChange={(height) => setMapSize((prev) => ({ ...prev, height }))}
           />
+        </div>
+
+        <div style={{ position: "relative", marginLeft: 8 }}>
+          <button
+            style={{
+              padding: "6px 20px",
+              textTransform: "uppercase",
+              fontSize: "14px",
+            }}
+            onClick={() => setBgTile(activeTile)}
+          >
+            Fill Base Layer
+          </button>
         </div>
       </div>
       {tiles.map((row, y) => (
