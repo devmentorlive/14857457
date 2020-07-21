@@ -1,4 +1,5 @@
 import React from "react";
+import { TILE_SIZE } from "../../constants";
 
 export default function Map({
   tiles,
@@ -44,8 +45,8 @@ export default function Map({
                   borderBottom: "1px solid #333",
                   borderRight: "1px solid #333",
                   background: `url(/sprites/${tileset}.png) -${bgTile.x}px -${bgTile.y}px no-repeat`,
-                  width: 32,
-                  height: 32,
+                  width: TILE_SIZE,
+                  height: TILE_SIZE,
                 }}
               />
             ))}
@@ -62,8 +63,8 @@ export default function Map({
                   borderBottom: "1px solid #333",
                   borderRight: "1px solid #333",
                   background: `url(/sprites/${tileset}.png) -${tile.v.x}px -${tile.v.y}px no-repeat`,
-                  width: 32,
-                  height: 32,
+                  width: TILE_SIZE,
+                  height: TILE_SIZE,
                 }}
               />
             ))}

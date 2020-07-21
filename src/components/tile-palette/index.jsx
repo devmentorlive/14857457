@@ -6,6 +6,8 @@ import MapDimension from "./map-dimension";
 import exportData from "./export";
 import importData from "./import";
 
+import { TILE_SIZE } from "../../constants";
+
 export default function TilePalette({
   tileset,
   setTileset,
@@ -34,9 +36,9 @@ export default function TilePalette({
   const palette = [];
   let id = 0;
 
-  for (let y = 0; y < height; y = y + 32) {
+  for (let y = 0; y < height; y = y + TILE_SIZE) {
     const row = [];
-    for (let x = 0; x < width; x = x + 32) {
+    for (let x = 0; x < width; x = x + TILE_SIZE) {
       row.push({ x, y, id: id++ });
     }
     palette.push(row);
@@ -59,7 +61,7 @@ export default function TilePalette({
         <div
           style={{
             position: "relative",
-            width: 32,
+            width: TILE_SIZE,
             marginLeft: 8,
           }}
         >
@@ -67,8 +69,8 @@ export default function TilePalette({
             style={{
               position: "relative",
               background: `url(/sprites/${tileset}.png) -${activeTile.x}px -${activeTile.y}px no-repeat`,
-              width: 32,
-              height: 32,
+              width: TILE_SIZE,
+              height: TILE_SIZE,
               top: 2,
             }}
           />
@@ -110,7 +112,7 @@ export default function TilePalette({
 
         <div style={{ position: "relative", marginLeft: 8 }}>
           <button
-            onClick={() => exportData({ bgTile, tiles })}
+            onClick={() => exportData({ tileset, mapSize, bgTile, tiles })}
             style={{
               padding: "4px 8px",
               height: 34,
@@ -129,7 +131,9 @@ export default function TilePalette({
 
         <div style={{ position: "relative", marginLeft: 8 }}>
           <button
-            onClick={() => importData({ setBgTile, setTiles })}
+            onClick={() =>
+              importData({ setTileset, setMapSize, setBgTile, setTiles })
+            }
             style={{
               padding: "4px 8px",
               height: 34,
@@ -151,15 +155,17 @@ export default function TilePalette({
         <div style={{ display: "flex" }}>
           {row.map((tile, x) => (
             <div
-              onClick={() => setActiveTile({ x: x * 32, y: y * 32 })}
+              onClick={() =>
+                setActiveTile({ x: x * TILE_SIZE, y: y * TILE_SIZE })
+              }
               style={{
                 borderTop: "1px solid #333",
                 borderRight: "1px solid #333",
-                background: `url(/sprites/${tileset}.png) -${x * 32}px -${
-                  y * 32
-                }px no-repeat`,
-                width: 32,
-                height: 32,
+                background: `url(/sprites/${tileset}.png) -${
+                  x * TILE_SIZE
+                }px -${y * TILE_SIZE}px no-repeat`,
+                width: TILE_SIZE,
+                height: TILE_SIZE,
               }}
             />
           ))}

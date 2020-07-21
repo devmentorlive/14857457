@@ -1,4 +1,5 @@
 import React from "react";
+import { MAX_MAP_SIZE } from "../../constants";
 
 export default function MapDimension({ label, value, onChange }) {
   return (
@@ -6,9 +7,13 @@ export default function MapDimension({ label, value, onChange }) {
       <input
         type="text"
         value={value}
-        onChange={(e) => onChange(Number(e.target.value.replace(/\D/g, "")))}
-        size={4}
-        maxLength={3}
+        onChange={(e) => {
+          const size = Number(e.target.value.replace(/\D/g, ""));
+          if (size <= MAX_MAP_SIZE) {
+            onChange(size);
+          }
+        }}
+        size={5}
       />
       <span style={{ position: "relative", left: -18 }}>{label}</span>
     </>
