@@ -25,7 +25,7 @@ export default function App() {
       _tiles.push(row);
     }
     setTiles(_tiles);
-  }, []);
+  }, [mapSize]);
 
   return (
     <div
