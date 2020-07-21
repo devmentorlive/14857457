@@ -8,19 +8,8 @@ import importData from "./import";
 
 import { TILE_SIZE } from "../../constants";
 
-export default function TilePalette({
-  tileset,
-  setTileset,
-  position,
-  activeTile,
-  setActiveTile,
-  mapSize,
-  setMapSize,
-  bgTile,
-  setBgTile,
-  tiles,
-  setTiles,
-}) {
+export default function TilePalette({ data, setData, position }) {
+  const { tileset, activeTile, mapSize } = data;
   const tilesetData = require("../../data/tilesets.json");
   const tilesets = Object.keys(tilesetData).map((set) => ({
     type: "group",
@@ -30,8 +19,8 @@ export default function TilePalette({
       label: variant,
     })),
   }));
-
   const [tilesetGroup, tilesetVariant] = tileset.split("/");
+
   const { width, height } = tilesetData[tilesetGroup].size;
   const palette = [];
   let id = 0;
@@ -78,7 +67,12 @@ export default function TilePalette({
         <div style={{ width: 200, marginLeft: 8 }}>
           <Dropdown
             options={tilesets}
-            onChange={(tileset) => setTileset(tileset.value)}
+            onChange={(tileset) =>
+              setData((prev) => ({
+                ...prev,
+                tileset: tileset.value,
+              }))
+            }
             value={tileset}
           />
         </div>
@@ -86,13 +80,17 @@ export default function TilePalette({
           <MapDimension
             value={mapSize.width}
             label="w"
-            onChange={(width) => setMapSize((prev) => ({ ...prev, width }))}
+            onChange={(width) =>
+              setData((prev) => ({ ...prev, mapSize: { ...prev, width } }))
+            }
           />
 
           <MapDimension
             value={mapSize.height}
             label="h"
-            onChange={(height) => setMapSize((prev) => ({ ...prev, height }))}
+            onChange={(height) =>
+              setData((prev) => ({ ...prev, mapSize: { ...prev, height } }))
+            }
           />
         </div>
 
@@ -104,7 +102,12 @@ export default function TilePalette({
               fontSize: "14px",
               height: 34,
             }}
-            onClick={() => setBgTile(activeTile)}
+            onClick={() =>
+              setData((prev) => ({
+                ...prev,
+                bgTile: activeTile,
+              }))
+            }
           >
             Fill Base Layer
           </button>
@@ -112,7 +115,7 @@ export default function TilePalette({
 
         <div style={{ position: "relative", marginLeft: 8 }}>
           <button
-            onClick={() => exportData({ tileset, mapSize, bgTile, tiles })}
+            onClick={() => exportData(data)}
             style={{
               padding: "4px 8px",
               height: 34,
@@ -131,9 +134,7 @@ export default function TilePalette({
 
         <div style={{ position: "relative", marginLeft: 8 }}>
           <button
-            onClick={() =>
-              importData({ setTileset, setMapSize, setBgTile, setTiles })
-            }
+            onClick={() => importData(setData)}
             style={{
               padding: "4px 8px",
               height: 34,
@@ -156,7 +157,10 @@ export default function TilePalette({
           {row.map((tile, x) => (
             <div
               onClick={() =>
-                setActiveTile({ x: x * TILE_SIZE, y: y * TILE_SIZE })
+                setData((prev) => ({
+                  ...prev,
+                  activeTile: { x: x * TILE_SIZE, y: y * TILE_SIZE },
+                }))
               }
               style={{
                 borderTop: "1px solid #333",

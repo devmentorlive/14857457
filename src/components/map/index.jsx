@@ -1,14 +1,8 @@
 import React from "react";
 import { TILE_SIZE } from "../../constants";
 
-export default function Map({
-  tiles,
-  setTiles,
-  activeTile,
-  tileset,
-  size,
-  bgTile,
-}) {
+export default function Map({ data, setData }) {
+  const { activeTile, bgTile, tiles, tileset, mapSize } = data;
   function cloneMatrix(m) {
     const clone = new Array(m.length);
     for (let i = 0; i < m.length; ++i) {
@@ -18,14 +12,17 @@ export default function Map({
   }
 
   function dropTile({ x, y }) {
-    setTiles((prev) => {
-      const clone = cloneMatrix(prev);
+    setData((prev) => {
+      const clone = cloneMatrix(prev.tiles);
       const tile = {
         ...clone[y][x],
         v: activeTile,
       };
       clone[y][x] = tile;
-      return clone;
+      return {
+        ...prev,
+        tiles: clone,
+      };
     });
   }
   return (
@@ -33,7 +30,7 @@ export default function Map({
       style={{
         boxSizing: "border-box",
         backgroundColor: "white",
-        width: size.width,
+        width: mapSize.width,
       }}
     >
       <div style={{ position: "absolute", zIndex: 1 }}>

@@ -5,18 +5,21 @@ import Map from "../map";
 import { TILE_SIZE } from "../../constants";
 
 export default function App() {
-  const [tileset, setTileset] = useState("rpg-nature-tileset/spring");
-  const [activeTile, setActiveTile] = useState({
-    x: 1 * TILE_SIZE,
-    y: 4 * TILE_SIZE,
-  });
-  const [tiles, setTiles] = useState([]);
-  const [bgTile, setBgTile] = useState({ x: -TILE_SIZE, y: -TILE_SIZE });
-  const [mapSize, setMapSize] = useState({
-    width: 1000,
-    height: 1000,
+  const [data, setData] = useState({
+    tileset: "rpg-nature-tileset/spring",
+    activeTile: {
+      x: 1 * TILE_SIZE,
+      y: 4 * TILE_SIZE,
+    },
+    tiles: [],
+    bgTile: { x: -TILE_SIZE, y: -TILE_SIZE },
+    mapSize: {
+      width: 1000,
+      height: 1000,
+    },
   });
   const { position } = useDraggable("handle");
+  const { tileset, activeTile, tiles, bgTile, mapSize } = data;
 
   useEffect(() => {
     const _tiles = [];
@@ -29,7 +32,10 @@ export default function App() {
       }
       _tiles.push(row);
     }
-    setTiles(_tiles);
+    setData((prev) => ({
+      ...prev,
+      tiles: _tiles,
+    }));
   }, [mapSize]);
 
   return (
@@ -43,28 +49,9 @@ export default function App() {
         border: "1px solid black",
       }}
     >
-      <TilePalette
-        position={position}
-        tileset={tileset}
-        setTileset={setTileset}
-        activeTile={activeTile}
-        setActiveTile={setActiveTile}
-        mapSize={mapSize}
-        setMapSize={setMapSize}
-        bgTile={bgTile}
-        setBgTile={setBgTile}
-        tiles={tiles}
-        setTiles={setTiles}
-      />
+      <TilePalette position={position} data={data} setData={setData} />
 
-      <Map
-        tiles={tiles}
-        tileset={tileset}
-        size={mapSize}
-        activeTile={activeTile}
-        setTiles={setTiles}
-        bgTile={bgTile}
-      />
+      <Map data={data} setData={setData} />
     </div>
   );
 }
