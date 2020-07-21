@@ -41,6 +41,7 @@ export default function App() {
       <TilePalette
         position={position}
         tileset={tileset}
+        setTileset={setTileset}
         activeTile={activeTile}
         setActiveTile={setActiveTile}
         size={{
