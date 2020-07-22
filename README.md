@@ -17,14 +17,15 @@ cd rpg-map-maker
 
 Happy Hacking!
 
-## Repo Branches
+## Repo Branches (Chapters)
 
-- [01-start-here](https://github.com/devmentorlive/14857457/tree/01-start-here)
-- [02-selectable-tileset](https://github.com/devmentorlive/14857457/tree/02-selectable-tileset)
-- [03-map-resize](https://github.com/devmentorlive/14857457/tree/03-map-resize)
-- [04-fill-base-layer](https://github.com/devmentorlive/14857457/tree/04-fill-base-layer)
-- [05-single-state-tree](https://github.com/devmentorlive/14857457/tree/05-single-state-tree)
-- [06-import-export](https://github.com/devmentorlive/14857457/tree/06-import-export)
+- [0-start-here](https://github.com/devmentorlive/14857457/tree/0-start-here)
+- [1-selectable-tileset](https://github.com/devmentorlive/14857457/tree/1-selectable-tileset)
+- [2-fill-base-layer](https://github.com/devmentorlive/14857457/tree/2-fill-base-layer)
+- [3-single-state-tree](https://github.com/devmentorlive/14857457/tree/3-single-state-tree)
+- [4-remove-magic-numbers](https://github.com/devmentorlive/14857457/tree/4-remove-magic-numbers)
+- [5-new-map-dialog](https://github.com/devmentorlive/14857457/tree/5-new-map-dialog)
+- [6-import-export](https://github.com/devmentorlive/14857457/tree/6-import-export)
 
 ## Get Live, Affordable JavaScript Mentorship
 

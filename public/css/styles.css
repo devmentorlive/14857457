@@ -10,6 +10,7 @@ body,
   font-family: "Airbnb Cereal App Book", sans-serif;
   background-color: black;
 }
+
 * {
   font-family: "Airbnb Cereal App Book", sans-serif;
 }
@@ -22,4 +23,8 @@ input[type="text"] {
   color: black;
   padding: 8px;
   transition: all 200ms ease;
+}
+
+label {
+  display: block;
 }
