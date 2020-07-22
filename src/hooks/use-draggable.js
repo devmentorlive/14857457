@@ -23,7 +23,7 @@ export default function useDraggable(handleId) {
     return () => {
       document.body.removeEventListener("mouseup", move);
       document.body.removeEventListener("mousemove", move);
-      handle.removeEventListener("mousedown");
+      document.body.removeEventListener("mousemove", move);
     };
   }, []);
 
