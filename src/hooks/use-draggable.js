@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 export default function useDraggable(handleId) {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [position, setPosition] = useState({ x: 100, y: 100 });
 
   useEffect(() => {
     const handle = document.getElementById("handle");

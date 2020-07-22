@@ -2,26 +2,17 @@ import React from "react";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 
-import MapDimension from "./map-dimension";
-import exportData from "./export";
-import importData from "./import";
-
+import useDraggable from "../../hooks/use-draggable";
+import { exportData } from "../../modules/persistence";
 import { TILE_SIZE } from "../../constants";
 
-export default function TilePalette({ data, setData, position }) {
-  const { tileset, activeTile, mapSize } = data;
-  const tilesetData = require("../../data/tilesets.json");
-  const tilesets = Object.keys(tilesetData).map((set) => ({
-    type: "group",
-    name: set.split("-").join(" "),
-    items: tilesetData[set].variants.map((variant) => ({
-      value: `${set}/${variant}`,
-      label: variant,
-    })),
-  }));
-  const [tilesetGroup, tilesetVariant] = tileset.split("/");
+export default function TilePalette({ data, setData }) {
+  const tilesetData = require("../../data/tilesets.json")[data.tileset];
+  const variants = tilesetData.variants;
+  const { position } = useDraggable("handle");
+  const { tileset, variant, activeTile } = data;
+  const { width, height } = tilesetData.size;
 
-  const { width, height } = tilesetData[tilesetGroup].size;
   const palette = [];
   let id = 0;
 
@@ -57,40 +48,24 @@ export default function TilePalette({ data, setData, position }) {
           <div
             style={{
               position: "relative",
-              background: `url(/sprites/${tileset}.png) -${activeTile.x}px -${activeTile.y}px no-repeat`,
+              background: `url(/sprites/${tileset}/${variants[0]}.png) -${activeTile.x}px -${activeTile.y}px no-repeat`,
               width: TILE_SIZE,
               height: TILE_SIZE,
               top: 2,
             }}
           />
         </div>
-        <div style={{ width: 200, marginLeft: 8 }}>
+
+        <div style={{ width: 200 }}>
           <Dropdown
-            options={tilesets}
-            onChange={(tileset) =>
+            options={variants}
+            onChange={(variant) =>
               setData((prev) => ({
                 ...prev,
-                tileset: tileset.value,
+                variant: variant.value,
               }))
             }
-            value={tileset}
-          />
-        </div>
-        <div style={{ position: "relative", marginLeft: 8 }}>
-          <MapDimension
-            value={mapSize.width}
-            label="w"
-            onChange={(width) =>
-              setData((prev) => ({ ...prev, mapSize: { ...prev, width } }))
-            }
-          />
-
-          <MapDimension
-            value={mapSize.height}
-            label="h"
-            onChange={(height) =>
-              setData((prev) => ({ ...prev, mapSize: { ...prev, height } }))
-            }
+            value={variant}
           />
         </div>
 
@@ -131,26 +106,6 @@ export default function TilePalette({ data, setData, position }) {
             />
           </button>
         </div>
-
-        <div style={{ position: "relative", marginLeft: 8 }}>
-          <button
-            onClick={() => importData(setData)}
-            style={{
-              padding: "4px 8px",
-              height: 34,
-            }}
-          >
-            <img
-              src="/img/arrow-line.png"
-              alt="export map data"
-              style={{
-                padding: "3px 0",
-                margin: 0,
-                transform: "scaleY(-1)",
-              }}
-            />
-          </button>
-        </div>
       </div>
       {palette.map((row, y) => (
         <div style={{ display: "flex" }}>
@@ -159,13 +114,16 @@ export default function TilePalette({ data, setData, position }) {
               onClick={() =>
                 setData((prev) => ({
                   ...prev,
-                  activeTile: { x: x * TILE_SIZE, y: y * TILE_SIZE },
+                  activeTile: {
+                    x: x * TILE_SIZE,
+                    y: y * TILE_SIZE,
+                  },
                 }))
               }
               style={{
                 borderTop: "1px solid #333",
                 borderRight: "1px solid #333",
-                background: `url(/sprites/${tileset}.png) -${
+                background: `url(/sprites/${tileset}/${variants[0]}.png) -${
                   x * TILE_SIZE
                 }px -${y * TILE_SIZE}px no-repeat`,
                 width: TILE_SIZE,

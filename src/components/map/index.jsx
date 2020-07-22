@@ -1,8 +1,11 @@
 import React from "react";
+
+import Dimension from "./dimension";
 import { TILE_SIZE } from "../../constants";
 
+export { Dimension };
 export default function Map({ data, setData }) {
-  const { activeTile, bgTile, tiles, tileset, mapSize } = data;
+  const { activeTile, bgTile, tiles, tileset, variant, mapSize } = data;
   function cloneMatrix(m) {
     const clone = new Array(m.length);
     for (let i = 0; i < m.length; ++i) {
@@ -41,7 +44,7 @@ export default function Map({ data, setData }) {
                 style={{
                   borderBottom: "1px solid #333",
                   borderRight: "1px solid #333",
-                  background: `url(/sprites/${tileset}.png) -${bgTile.x}px -${bgTile.y}px no-repeat`,
+                  background: `url(/sprites/${tileset}/${variant}.png) -${bgTile.x}px -${bgTile.y}px no-repeat`,
                   width: TILE_SIZE,
                   height: TILE_SIZE,
                 }}
@@ -59,7 +62,7 @@ export default function Map({ data, setData }) {
                 style={{
                   borderBottom: "1px solid #333",
                   borderRight: "1px solid #333",
-                  background: `url(/sprites/${tileset}.png) -${tile.v.x}px -${tile.v.y}px no-repeat`,
+                  background: `url(/sprites/${tileset}/${variant}.png) -${tile.v.x}px -${tile.v.y}px no-repeat`,
                   width: TILE_SIZE,
                   height: TILE_SIZE,
                 }}
