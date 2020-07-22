@@ -23,7 +23,8 @@ Happy Hacking!
 - [02-selectable-tileset](https://github.com/devmentorlive/14857457/tree/02-selectable-tileset)
 - [03-map-resize](https://github.com/devmentorlive/14857457/tree/03-map-resize)
 - [04-fill-base-layer](https://github.com/devmentorlive/14857457/tree/04-fill-base-layer)
-- [05-import-export](https://github.com/devmentorlive/14857457/tree/05-import-export)
+- [05-single-state-tree](https://github.com/devmentorlive/14857457/tree/05-single-state-tree)
+- [06-import-export](https://github.com/devmentorlive/14857457/tree/06-import-export)
 
 ## Get Live, Affordable JavaScript Mentorship
 
