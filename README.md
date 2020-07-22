@@ -1,8 +1,8 @@
-# Build a RPG Map Editor in React (part 1) [Drag n Drop, Matrices, useState]
+# Build a RPG Map Editor in React (part 2) [hooks, copy/paste, json]
 
-In this screencast we will be building the map editor we will need for our RPG. You will learn how to implement drag and drop, how to use matrices, and of course, useState, and useEffect. We will also be implementing drag as a custom React hook!
+Today we will build enough of the map maker tool to start using it in our game! I will show you how to copy and paste your clipboard programmatically using JavaScript's navigator object, how to do conditional rendering, and of course, lots more practice with useState and useEffect. Also, I will teach you why it is easier to keep state together that changes together instead of breaking it all up into multiple useState calls..
 
-This repository contains the code that I based an episode of DevmentorLive on. You can find the episode at: [Build a RPG Map Editor in React (part 1) [Drag n Drop, Matrices, useState])](https://devmentor.live/screencasts/build-a-rpg-map-editor-in-react-part-1-drag-n-drop-matrices-usestate)
+This repository contains the code that I based an episode of DevmentorLive on. You can find the episode at: [Build a RPG Map Editor in React (part 1) [Drag n Drop, Matrices, useState])](https://devmentor.live/screencasts/build-a-rpg-map-editor-in-react-part-2-hooks-copy-paste-json)
 
 This projects uses sprites from these awesome creators:
 
@@ -11,7 +11,7 @@ This projects uses sprites from these awesome creators:
 ## To get started
 
 ```
-git clone https://github.com/devmentorlive/5bd04edb.git rpg-map-maker
+git clone https://github.com/devmentorlive/14857457.git rpg-map-maker
 cd rpg-map-maker
 ```
 
