@@ -2,14 +2,11 @@ import React from "react";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 
-export default function TilePalette({
-  tileset,
-  setTileset,
-  position,
-  activeTile,
-  setActiveTile,
-  setBgTile,
-}) {
+import useDraggable from "../../hooks/use-draggable";
+
+export default function TilePalette({ values, setValues }) {
+  const { tileset, activeTile, variant } = values;
+  const { position } = useDraggable("handle");
   const tilesetData = require("../../data/tilesets.json");
   const tilesets = Object.keys(tilesetData).map((set) => ({
     type: "group",
@@ -20,8 +17,7 @@ export default function TilePalette({
     })),
   }));
 
-  const [tilesetGroup, tilesetVariant] = tileset.split("/");
-  const { width, height } = tilesetData[tilesetGroup].size;
+  const { width, height } = tilesetData[tileset].size;
   const tiles = [];
   let id = 0;
 
@@ -51,7 +47,7 @@ export default function TilePalette({
           <div
             style={{
               position: "relative",
-              background: `url(/sprites/${tileset}.png) -${activeTile.x}px -${activeTile.y}px no-repeat`,
+              background: `url(/sprites/${tileset}/${variant}.png) -${activeTile.x}px -${activeTile.y}px no-repeat`,
               width: 32,
               height: 32,
               top: 2,
@@ -62,14 +58,24 @@ export default function TilePalette({
         <div style={{ width: 200, marginLeft: 8 }}>
           <Dropdown
             options={tilesets}
-            onChange={(tileset) => setTileset(tileset.value)}
+            onChange={(tileset) =>
+              setValues((prev) => ({
+                ...prev,
+                tileset: tileset.value,
+              }))
+            }
             value={tileset}
           />
         </div>
 
         <div style={{ width: 200, marginLeft: 8 }}>
           <button
-            onClick={() => setBgTile(activeTile)}
+            onClick={() =>
+              setValues((prev) => ({
+                ...prev,
+                bgTile: activeTile,
+              }))
+            }
             style={{
               padding: "6px 20px",
               textTransform: "uppercase",
@@ -84,13 +90,18 @@ export default function TilePalette({
         <div style={{ display: "flex" }}>
           {row.map((tile, x) => (
             <div
-              onClick={() => setActiveTile({ x: x * 32, y: y * 32 })}
+              onClick={() =>
+                setValues((prev) => ({
+                  ...prev,
+                  activeTile: { x: x * 32, y: y * 32 },
+                }))
+              }
               style={{
                 borderTop: "1px solid #333",
                 borderRight: "1px solid #333",
-                background: `url(/sprites/${tileset}.png) -${x * 32}px -${
-                  y * 32
-                }px no-repeat`,
+                background: `url(/sprites/${tileset}/${variant}.png) -${
+                  x * 32
+                }px -${y * 32}px no-repeat`,
                 width: 32,
                 height: 32,
               }}

@@ -1,13 +1,8 @@
 import React from "react";
 
-export default function Map({
-  tiles,
-  setTiles,
-  activeTile,
-  tileset,
-  size,
-  bgTile,
-}) {
+export default function Map({ values, setValues }) {
+  const { activeTile, mapSize, tiles, tileset, bgTile, variant } = values;
+
   function cloneMatrix(m) {
     const clone = new Array(m.length);
     for (let i = 0; i < m.length; ++i) {
@@ -17,22 +12,26 @@ export default function Map({
   }
 
   function dropTile({ x, y }) {
-    setTiles((prev) => {
-      const clone = cloneMatrix(prev);
+    setValues((prev) => {
+      const clone = cloneMatrix(prev.tiles);
       const tile = {
         ...clone[y][x],
         v: activeTile,
       };
       clone[y][x] = tile;
-      return clone;
+      return {
+        ...prev,
+        tiles: clone,
+      };
     });
   }
+
   return (
     <div
       style={{
         boxSizing: "border-box",
         backgroundColor: "white",
-        width: size.width,
+        width: mapSize.width,
       }}
     >
       <div style={{ position: "absolute", zIndex: 1 }}>
@@ -44,7 +43,7 @@ export default function Map({
                 style={{
                   borderBottom: "1px solid #333",
                   borderRight: "1px solid #333",
-                  background: `url(/sprites/${tileset}.png) -${bgTile.x}px -${bgTile.y}px no-repeat`,
+                  background: `url(/sprites/${tileset}/${variant}.png) -${bgTile.x}px -${bgTile.y}px no-repeat`,
                   width: 32,
                   height: 32,
                 }}
@@ -63,7 +62,7 @@ export default function Map({
                 style={{
                   borderBottom: "1px solid #333",
                   borderRight: "1px solid #333",
-                  background: `url(/sprites/${tileset}.png) -${tile.v.x}px -${tile.v.y}px no-repeat`,
+                  background: `url(/sprites/${tileset}/${variant}.png) -${tile.v.x}px -${tile.v.y}px no-repeat`,
                   width: 32,
                   height: 32,
                 }}
