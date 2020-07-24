@@ -32,9 +32,9 @@ This project uses sprites from:
 
 ## Videos in this series
 
-- [Part 1 - Animating a character sprite, movement](https://devmentor.live/screencasts/react-rpg-build-a-game-using-custom-react-hooks-and-event-listeners)
-- [Part 2 - Build a Map Maker (Part 1)](https://devmentor.live/screencasts/build-a-rpg-map-editor-in-react-part-1-drag-n-drop-matrices-usestate)
-- [Part 3 - THIS VIDEO | Build a Map Maker (Part 2)](https://devmentor.live/screencasts/build-a-rpg-map-editor-in-react-part-2-hooks-copy-paste-json)
+- [Part 1 - Animating a character sprite, movement](https://youtu.be/DqpPgK13oEM)
+- [Part 2 - Build a Map Maker (Part 1)](https://youtu.be/0IOXlXE07jE)
+- [Part 3 - THIS VIDEO | Build a Map Maker (Part 2)](TO COME)
 
 ## To get started
 
