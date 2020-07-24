@@ -1,6 +1,13 @@
 import React from "react";
 
-export default function Map({ tiles, setTiles, activeTile, tileset, size }) {
+export default function Map({
+  tiles,
+  setTiles,
+  activeTile,
+  tileset,
+  size,
+  bgTile,
+}) {
   function cloneMatrix(m) {
     const clone = new Array(m.length);
     for (let i = 0; i < m.length; ++i) {
@@ -28,22 +35,43 @@ export default function Map({ tiles, setTiles, activeTile, tileset, size }) {
         width: size.width,
       }}
     >
-      {tiles.map((row, y) => (
-        <div style={{ display: "flex" }}>
-          {row.map((tile, x) => (
-            <div
-              onClick={() => dropTile({ x, y })}
-              style={{
-                borderBottom: "1px solid #333",
-                borderRight: "1px solid #333",
-                background: `url(/sprites/${tileset}.png) -${tile.v.x}px -${tile.v.y}px no-repeat`,
-                width: 32,
-                height: 32,
-              }}
-            />
-          ))}
-        </div>
-      ))}
+      <div style={{ position: "absolute", zIndex: 1 }}>
+        {tiles.map((row, y) => (
+          <div style={{ display: "flex" }}>
+            {row.map((tile, x) => (
+              <div
+                onClick={() => dropTile({ x, y })}
+                style={{
+                  borderBottom: "1px solid #333",
+                  borderRight: "1px solid #333",
+                  background: `url(/sprites/${tileset}.png) -${bgTile.x}px -${bgTile.y}px no-repeat`,
+                  width: 32,
+                  height: 32,
+                }}
+              />
+            ))}
+          </div>
+        ))}
+      </div>
+
+      <div style={{ position: "absolute", zIndex: 2 }}>
+        {tiles.map((row, y) => (
+          <div style={{ display: "flex" }}>
+            {row.map((tile, x) => (
+              <div
+                onClick={() => dropTile({ x, y })}
+                style={{
+                  borderBottom: "1px solid #333",
+                  borderRight: "1px solid #333",
+                  background: `url(/sprites/${tileset}.png) -${tile.v.x}px -${tile.v.y}px no-repeat`,
+                  width: 32,
+                  height: 32,
+                }}
+              />
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
