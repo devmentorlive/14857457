@@ -38,7 +38,7 @@ This project uses sprites from:
 
 ## To get started
 
-Download the complete code from https://devmentor.live/admin/screencasts/reactjs-based-rpg-game-part-3-map-builder-selectable-tileset-background-layer/edit
+Download the complete code from https://devmentor.live/screencasts/reactjs-based-rpg-game-part-3-map-builder-selectable-tileset-background-layer
 
 OR
 
