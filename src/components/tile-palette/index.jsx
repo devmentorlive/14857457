@@ -10,7 +10,7 @@ export default function TilePalette({ values, setValues }) {
   const tilesetData = require("../../data/tilesets.json");
   const variants = [Object.keys(tilesetData)[0]].map((set) => ({
     type: "group",
-    name: set.replace(/\-/g, " "),
+    name: set.replace(/-/g, " "),
     items: tilesetData[set].variants,
   }));
 
