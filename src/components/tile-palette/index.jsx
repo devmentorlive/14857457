@@ -8,13 +8,10 @@ export default function TilePalette({ values, setValues }) {
   const { tileset, activeTile, variant } = values;
   const { position } = useDraggable("handle");
   const tilesetData = require("../../data/tilesets.json");
-  const tilesets = Object.keys(tilesetData).map((set) => ({
+  const variants = [Object.keys(tilesetData)[0]].map((set) => ({
     type: "group",
-    name: set.split("-", " "),
-    items: tilesetData[set].variants.map((variant) => ({
-      value: `${set}/${variant}`,
-      label: variant,
-    })),
+    name: set.replace(/\-/g, " "),
+    items: tilesetData[set].variants,
   }));
 
   const { width, height } = tilesetData[tileset].size;
@@ -57,14 +54,14 @@ export default function TilePalette({ values, setValues }) {
 
         <div style={{ width: 200, marginLeft: 8 }}>
           <Dropdown
-            options={tilesets}
-            onChange={(tileset) =>
+            options={variants}
+            onChange={(variant) =>
               setValues((prev) => ({
                 ...prev,
-                tileset: tileset.value,
+                variant: variant.value,
               }))
             }
-            value={tileset}
+            value={variant}
           />
         </div>
 
