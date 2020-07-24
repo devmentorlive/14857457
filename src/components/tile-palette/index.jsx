@@ -8,6 +8,7 @@ export default function TilePalette({
   position,
   activeTile,
   setActiveTile,
+  setBgTile,
 }) {
   const tilesetData = require("../../data/tilesets.json");
   const tilesets = Object.keys(tilesetData).map((set) => ({
@@ -64,6 +65,19 @@ export default function TilePalette({
             onChange={(tileset) => setTileset(tileset.value)}
             value={tileset}
           />
+        </div>
+
+        <div style={{ width: 200, marginLeft: 8 }}>
+          <button
+            onClick={() => setBgTile(activeTile)}
+            style={{
+              padding: "6px 20px",
+              textTransform: "uppercase",
+              fontSize: 14,
+            }}
+          >
+            Fill BG
+          </button>
         </div>
       </div>
       {tiles.map((row, y) => (
